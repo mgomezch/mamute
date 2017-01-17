@@ -1,5 +1,22 @@
 #!/bin/bash
 
+export VRAPTOR_ENV="${VRAPTOR_ENV:-production}"
+
+export MAMUTE_ADDRESS="${MAMUTE_ADDRESS:-http://localhost}"
+export MAMUTE_PORT="${MAMUTE_PORT:-80}"
+
+export DB_HOST="${DB_HOST:-mysql}"
+export DB_PORT="${DB_PORT:-3306}"
+export DB_USERNAME="${DB_USERNAME:-mamute}"
+export DB_PASSWORD="${DB_PASSWORD:-mamute}"
+export DB_NAME="${DB_NAME:-mamute}"
+
+export MAIL_SERVER="${MAIL_SERVER:-mail}"
+export MAIL_PORT="${MAIL_PORT:-25}"
+export MAIL_USE_TLS="${MAIL_USE_TLS:-false}"
+export MAIL_USERNAME="${MAIL_USERNAME:-mail}"
+export MAIL_PASSWORD="${MAIL_PASSWORD:-mail}"
+
 
 cat > 'WEB-INF/classes/production/hibernate.cfg.xml' <<EOF
 <?xml version='1.0' encoding='utf-8'?>
@@ -31,9 +48,9 @@ EOF
 
 
 cat > 'WEB-INF/classes/production.properties' <<EOF
-host = https://${MAMUTE_HOST}:${MAMUTE_PORT}
+host = ${MAMUTE_ADDRESS}
 home.url = ${MAMUTE_HOME_URL}
-mail_logo_url = http://${MAMUTE_HOST}:${MAMUTE_PORT}/imgs/logo-mail.png
+mail_logo_url = ${MAMUTE_ADDRESS}/imgs/logo-mail.png
 use.routes.parser.hack = ${MAMUTE_USE_ROUTE_PARSER_HACK}
 feature.auth.db = ${MAMUTE_AUTH_DB}
 feature.facebook.login = ${MAMUTE_FACEBOOK_LOGIN}

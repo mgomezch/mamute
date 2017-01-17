@@ -7,39 +7,6 @@ WORKDIR /opt/mamute
 COPY artifacts/mamute-1.5.0.war mamute.war
 RUN unzip mamute.war
 
-ENV \
-  MAMUTE_HOST="localhost" \
-  MAMUTE_PORT="80" \
-  \
-  MAMUTE_DB_HOST="mysql" \
-  MAMUTE_DB_PORT="3306" \
-  MAMUTE_DB_USERNAME="mamute" \
-  MAMUTE_DB_PASSWORD="mamute" \
-  MAMUTE_DB_NAME="mamute" \
-  MAMUTE_DB_SHOW_SQL="false" \
-  MAMUTE_DB_FORMAT_SQL="false" \
-  \
-  MAMUTE_MAIL_SERVER="mail" \
-  MAMUTE_MAIL_PORT="25" \
-  MAMUTE_MAIL_USE_TLS="false" \
-  MAMUTE_MAIL_USERNAME="mail" \
-  MAMUTE_MAIL_PASSWORD="mail" \
-  MAMUTE_MAIL_FROM="no-reply@mahisoft.com" \
-  MAMUTE_MAIL_FROM_NAME="Mamute" \
-  \
-  MAMUTE_AUTH_DB="true" \
-  MAMUTE_FACEBOOK_LOGIN="false" \
-  MAMUTE_GOOGLE_LOGIN="false" \
-  \
-  MAMUTE_ATTACHMENTS_ROOT_FS_PATH="/var/lib/mamute/attachments" \
-  MAMUTE_DELETABLE_QUESTIONS="true" \
-  MAMUTE_FEATURE_SIGNUP="true" \
-  MAMUTE_FEATURE_SOLR="true" \
-  MAMUTE_HOME_URL="/" \
-  MAMUTE_USE_ROUTE_PARSER_HACK="false" \
-  \
-  VRAPTOR_ENV="production"
-
 EXPOSE 80
 
 COPY docker-entrypoint.sh setup.sh ./
