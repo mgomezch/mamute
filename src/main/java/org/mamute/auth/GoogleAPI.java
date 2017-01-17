@@ -26,6 +26,9 @@ public class GoogleAPI implements SocialAPI{
 	public Optional<SignupInfo> getSignupInfo() {
 		JsonObject jsonObject = new JsonParser().parse(makeRequest(getAccessToken()).getBody()).getAsJsonObject();
 	    String email = jsonObject.get("emails").getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString();
+	    if (!email.endsWith("@mahisoft.com")) {
+		return Optional.absent();
+	    }
 	    String name = jsonObject.get("displayName").getAsString();
 	    String photoUrl = jsonObject.get("image").getAsJsonObject().get("url").getAsString();
 	    
