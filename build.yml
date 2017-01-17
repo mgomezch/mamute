@@ -1,0 +1,17 @@
+build:
+
+  version: "2016-03-14"
+
+  steps:
+
+    builder:
+      name: "builder"
+      dockerfile: "Dockerfile.builder"
+      artifacts:
+        - "/opt/mamute/target/mamute-1.5.0.war:./artifacts/"
+
+    deployment:
+      name: "mgomezch/mamute"
+      dockerfile: "Dockerfile.deployment"
+      depends_on:
+        - "builder"
