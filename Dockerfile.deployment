@@ -10,5 +10,7 @@ RUN unzip mamute.war
 EXPOSE 80
 
 COPY docker-entrypoint.sh setup.sh ./
+RUN chmod +x docker-entrypoint.sh setup.sh
+
 ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["./setup.sh"]

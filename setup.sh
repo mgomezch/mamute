@@ -6,6 +6,7 @@ export VRAPTOR_ENV="${VRAPTOR_ENV:-production}"
 
 export MAMUTE_ADDRESS="${MAMUTE_ADDRESS:-http://localhost}"
 export MAMUTE_PORT="${MAMUTE_PORT:-80}"
+export PORT="${MAMUTE_PORT}"
 
 export MAMUTE_DB_HOST="${MAMUTE_DB_HOST:-mysql}"
 export MAMUTE_DB_PORT="${MAMUTE_DB_PORT:-3306}"
