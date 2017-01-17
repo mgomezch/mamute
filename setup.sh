@@ -1,21 +1,42 @@
 #!/bin/bash
 
+
+
 export VRAPTOR_ENV="${VRAPTOR_ENV:-production}"
 
 export MAMUTE_ADDRESS="${MAMUTE_ADDRESS:-http://localhost}"
 export MAMUTE_PORT="${MAMUTE_PORT:-80}"
 
-export DB_HOST="${DB_HOST:-mysql}"
-export DB_PORT="${DB_PORT:-3306}"
-export DB_USERNAME="${DB_USERNAME:-mamute}"
-export DB_PASSWORD="${DB_PASSWORD:-mamute}"
-export DB_NAME="${DB_NAME:-mamute}"
+export MAMUTE_DB_HOST="${MAMUTE_DB_HOST:-mysql}"
+export MAMUTE_DB_PORT="${MAMUTE_DB_PORT:-3306}"
+export MAMUTE_DB_USERNAME="${MAMUTE_DB_USERNAME:-mamute}"
+export MAMUTE_DB_PASSWORD="${MAMUTE_DB_PASSWORD:-mamute}"
+export MAMUTE_DB_NAME="${MAMUTE_DB_NAME:-mamute}"
+export MAMUTE_DB_SHOW_SQL="${MAMUTE_DB_SHOW_SQL:-false}"
+export MAMUTE_DB_FORMAT_SQL="${MAMUTE_DB_FORMAT_SQL:-false}"
 
-export MAIL_SERVER="${MAIL_SERVER:-mail}"
-export MAIL_PORT="${MAIL_PORT:-25}"
-export MAIL_USE_TLS="${MAIL_USE_TLS:-false}"
-export MAIL_USERNAME="${MAIL_USERNAME:-mail}"
-export MAIL_PASSWORD="${MAIL_PASSWORD:-mail}"
+export MAMUTE_MAIL_SERVER="${MAMUTE_MAIL_SERVER:-mail}"
+export MAMUTE_MAIL_PORT="${MAMUTE_MAIL_PORT:-25}"
+export MAMUTE_MAIL_USE_TLS="${MAMUTE_MAIL_USE_TLS:-false}"
+export MAMUTE_MAIL_USERNAME="${MAMUTE_MAIL_USERNAME:-mail}"
+export MAMUTE_MAIL_PASSWORD="${MAMUTE_MAIL_PASSWORD:-mail}"
+export MAMUTE_MAIL_FROM="${MAMUTE_MAIL_FROM:-no-reply@mamute.example.com}"
+export MAMUTE_MAIL_FROM_NAME="${MAMUTE_MAIL_FROM_NAME:-Mamute}"
+
+export MAMUTE_HOME_URL="${MAMUTE_HOME_URL:-/}"
+export MAMUTE_USE_ROUTE_PARSER_HACK="${MAMUTE_USE_ROUTE_PARSER_HACK:-false}"
+export MAMUTE_AUTH_DB="${MAMUTE_AUTH_DB:-true}"
+export MAMUTE_FACEBOOK_LOGIN="${MAMUTE_FACEBOOK_LOGIN:-false}"
+export MAMUTE_FEATURE_GOOGLE_SEARCH="${MAMUTE_FEATURE_GOOGLE_SEARCH:-false}"
+export MAMUTE_FEATURE_SOLR="${MAMUTE_FEATURE_SOLR:-true}"
+export MAMUTE_SOLR_EMBEDDED="${MAMUTE_SOLR_EMBEDDED:-true}"
+export MAMUTE_FEATURE_SIGNUP="${MAMUTE_FEATURE_SIGNUP:-false}"
+export MAMUTE_DELETABLE_QUESTIONS="${MAMUTE_DELETABLE_QUESTIONS:-true}"
+export MAMUTE_ATTACHMENTS_ROOT_FS_PATH="${MAMUTE_ATTACHMENTS_ROOT_FS_PATH:-/var/lib/mamute/attachments}"
+export MAMUTE_FEATURE_GOOGLE_LOGIN="${MAMUTE_FEATURE_GOOGLE_LOGIN:-false}"
+export MAMUTE_GOOGLE_LOGIN_CLIENT_ID="${MAMUTE_GOOGLE_LOGIN_CLIENT_ID:-''}"
+export MAMUTE_GOOGLE_LOGIN_CLIENT_SECRET="${MAMUTE_GOOGLE_LOGIN_CLIENT_SECRET:-''}"
+
 
 
 cat > 'WEB-INF/classes/production/hibernate.cfg.xml' <<EOF
@@ -48,16 +69,18 @@ EOF
 
 
 cat > 'WEB-INF/classes/production.properties' <<EOF
+
 host = ${MAMUTE_ADDRESS}
 home.url = ${MAMUTE_HOME_URL}
 mail_logo_url = ${MAMUTE_ADDRESS}/imgs/logo-mail.png
 use.routes.parser.hack = ${MAMUTE_USE_ROUTE_PARSER_HACK}
 feature.auth.db = ${MAMUTE_AUTH_DB}
 feature.facebook.login = ${MAMUTE_FACEBOOK_LOGIN}
-feature.solr = ${MAMUTE_FEATURE_SOLR}
+feature.google_search = ${MAMUTE_FEATURE_GOOGLE_SEARCH}
 feature.signup = ${MAMUTE_FEATURE_SIGNUP}
 deletable.questions = ${MAMUTE_DELETABLE_QUESTIONS}
 attachments.root.fs.path = ${MAMUTE_ATTACHMENTS_ROOT_FS_PATH}
+feature.google.search = ${MAMUTE_FEATURE_GOOGLE_SEARCH}
 
 vraptor.simplemail.main.server = ${MAMUTE_MAIL_SERVER}
 vraptor.simplemail.main.port = ${MAMUTE_MAIL_PORT}
@@ -69,10 +92,14 @@ vraptor.errorcontrol.error.subject = Mamute error
 vraptor.simplemail.main.from = ${MAMUTE_MAIL_FROM}
 vraptor.simplemail.main.from.name = ${MAMUTE_MAIL_FROM_NAME}
 
-feature.google.login = ${MAMUTE_GOOGLE_AUTH}
+feature.google.login = ${MAMUTE_FEATURE_GOOGLE_LOGIN}
 google.redirect_uri = /sign-up/google/
 google.client_id = ${MAMUTE_GOOGLE_LOGIN_CLIENT_ID}
 google.client_secret = ${MAMUTE_GOOGLE_LOGIN_CLIENT_SECRET}
+
+feature.solr = ${MAMUTE_FEATURE_SOLR}
+solr.embedded = true
+
 EOF
 
 
