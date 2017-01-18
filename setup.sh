@@ -33,6 +33,7 @@ export MAMUTE_FEATURE_GOOGLE_SEARCH="${MAMUTE_FEATURE_GOOGLE_SEARCH:-false}"
 export MAMUTE_FEATURE_LOGIN_REQUIRED="${MAMUTE_FEATURE_LOGIN_REQUIRED:-true}"
 export MAMUTE_FEATURE_SIGNUP="${MAMUTE_FEATURE_SIGNUP:-false}"
 export MAMUTE_FEATURE_SOLR="${MAMUTE_FEATURE_SOLR:-true}"
+export MAMUTE_FEATURE_TAGS_MANDATORY="${MAMUTE_TAGS_MANDATORY:-true}"
 export MAMUTE_GOOGLE_LOGIN_CLIENT_ID="${MAMUTE_GOOGLE_LOGIN_CLIENT_ID:-''}"
 export MAMUTE_GOOGLE_LOGIN_CLIENT_SECRET="${MAMUTE_GOOGLE_LOGIN_CLIENT_SECRET:-''}"
 export MAMUTE_HOME_URL="${MAMUTE_HOME_URL:-/}"
@@ -87,12 +88,14 @@ deletable.questions = ${MAMUTE_DELETABLE_QUESTIONS}
 feature.auth.db = ${MAMUTE_AUTH_DB}
 feature.facebook.login = ${MAMUTE_FEATURE_FACEBOOK_LOGIN}
 feature.google_search = ${MAMUTE_FEATURE_GOOGLE_SEARCH}
-feature.google.search = ${MAMUTE_FEATURE_GOOGLE_SEARCH}
 feature.login.required = ${MAMUTE_FEATURE_LOGIN_REQUIRED}
 feature.signup = ${MAMUTE_FEATURE_SIGNUP}
+feature.solr = ${MAMUTE_FEATURE_SOLR}
+feature.tags.mandatory = ${MAMUTE_FEATURE_TAGS_MANDATORY}
 home.url = ${MAMUTE_HOME_URL}
 host = ${MAMUTE_ADDRESS}
 mail_logo_url = ${MAMUTE_ADDRESS}/imgs/logo-mail.png
+solr.embedded = ${MAMUTE_SOLR_EMBEDDED}
 use.routes.parser.hack = ${MAMUTE_USE_ROUTE_PARSER_HACK}
 
 vraptor.simplemail.main.server = ${MAMUTE_MAIL_SERVER}
@@ -109,9 +112,6 @@ feature.google.login = ${MAMUTE_FEATURE_GOOGLE_LOGIN}
 google.redirect_uri = /sign-up/google/
 google.client_id = ${MAMUTE_GOOGLE_LOGIN_CLIENT_ID}
 google.client_secret = ${MAMUTE_GOOGLE_LOGIN_CLIENT_SECRET}
-
-feature.solr = ${MAMUTE_FEATURE_SOLR}
-solr.embedded = true
 
 permission.rule.create_comment = ${MAMUTE_PERMISSION_RULE_CREATE_COMMENT}
 permission.rule.vote_up = ${MAMUTE_PERMISSION_RULE_VOTE_UP}
