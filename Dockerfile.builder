@@ -41,18 +41,18 @@ RUN npm install -g grunt-cli
 
 
 ENV MAMUTE_VERSION=1.5.0
-ENV MAVEN_OPTS=-Dmaven.artifact.threads=8
 
 WORKDIR /opt/mamute
 
-COPY pom.xml .
-COPY local-repo local-repo
-COPY ant-lib ant-lib
-COPY maven-settings.xml /root/.m2/settings.xml
-RUN mvn dependency:resolve
+# The dependency:go-offline Maven target is badly broken and doesn't actually get all dependencies required by the package target called in offline mode, and without offline mode, it re-downloads all dependencies anyway.  This cannot be solved cleanly except with a remote repository with cached dependencies, either through file:// or, better yet, Artifactory.
+# COPY pom.xml .
+# COPY local-repo local-repo
+# COPY ant-lib ant-lib
+# COPY maven-settings.xml /root/.m2/settings.xml
+# RUN mvn dependency:resolve
 
 COPY package.json .
 RUN npm install
 
 COPY . .
-RUN mvn package -DskipTests
+RUN MAVEN_OPTS=-Dmaven.artifact.threads=8 mvn package -DskipTests
