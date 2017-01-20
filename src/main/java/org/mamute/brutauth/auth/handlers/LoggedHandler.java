@@ -26,7 +26,7 @@ public class LoggedHandler implements RuleHandler {
 			result.use(Results.http()).body(bundle.getMessage("error.requires_login")).sendError(403);			
 		}else{
 			result.include("loginRequiredMessages", asList(messageFactory.build("alert", "auth.access.denied")));
-			String redirectUrl = req.getRequestURL().toString();
+			String redirectUrl = req.getRequestURL().toString().replaceFirst("\\Ahttps:", "http:");
 			result.redirectTo(AuthController.class).loginForm(redirectUrl);
 		}
 	}

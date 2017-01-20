@@ -35,6 +35,7 @@ public class AuthController extends BaseController {
 	@Public
 	@Get
 	public void loginForm(String redirectUrl) {
+		redirectUrl = redirectUrl.replace("\\Ahttp:", "https:");
 		if (loggedUser.isLoggedIn()) {
 			result.include("loginRequiredMessages", Collections.emptyList());
 			redirectToRightUrl(redirectUrl);
@@ -52,6 +53,7 @@ public class AuthController extends BaseController {
 	@Public
 	@Post
 	public void login(String email, String password, String redirectUrl) {
+		redirectUrl = redirectUrl.replace("\\Ahttp:", "https:");
 		try {
 			if (validator.validate(email, password) && auth.authenticate(email, password)) {
 				redirectToRightUrl(redirectUrl);

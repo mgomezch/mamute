@@ -66,6 +66,7 @@ public class DefaultViewObjects {
 		} else {
 			url = host + req.getRequestURI();
 		}
+		url = url.replaceFirst("\\Ahttp:", "https:");
 		if(url.endsWith("/")) url = url.split(SLASH_AT_END)[0];
 		return url;
 	}
