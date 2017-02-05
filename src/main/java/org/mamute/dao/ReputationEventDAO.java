@@ -107,8 +107,8 @@ public class ReputationEventDAO {
 
 	@SuppressWarnings("unchecked")
 	public KarmaByContextHistory karmaWonByQuestion(User user) {
-		String hql = "select e.context, sum(e.karmaReward), e.date from ReputationEvent e " +
-				"where e.user=:user " +
+		String hql = "select e.context, sum(e.karmaReward), e.date from ReputationEvent e, Question q " +
+				"where e.user=:user and e.context.id = q.id and q.deleted = 0 " +
 				"group by e.context, day(e.date) " +
 				"order by e.date desc";
 
@@ -136,7 +136,7 @@ public class ReputationEventDAO {
 				"where user=a.author and e.type in (:events)" +
 				where +
 				"and t=:tag " +
-				"and q.id=e.context.id and e.context.class='QUESTION'"+
+				"and q.id=e.context.id and e.context.class='QUESTION' and q.deleted = 0 "+
 				"group by user "+
 				"order by karmaSum desc";
 
@@ -162,7 +162,7 @@ public class ReputationEventDAO {
 				+ "from ReputationEvent e, Question q "+
 				"join e.user user "+
 				"join q.information.tags t "+
-				"where e.type in (:events)" + where + "and t=:tag and e.context.id = q.id and e.context.class='QUESTION' "+
+				"where e.type in (:events)" + where + "and t=:tag and e.context.id = q.id and e.context.class='QUESTION' and q.deleted = 0 "+
 				"group by user "+
 				"order by karmaSum desc";
 
